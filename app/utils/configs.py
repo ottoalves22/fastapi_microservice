@@ -3,7 +3,6 @@ try:
 except ImportError:
     from ConfigParser import ConfigParser
 import logging
-from utils.els_logger import ELSLoggerHandler
 import json
 import os
 from pathlib import Path
@@ -25,11 +24,3 @@ pg_user = data.get('postgres', 'PG_USERNAME', vars=os.environ)
 pg_pwd = data.get('postgres', 'PG_PASSWORD', vars=os.environ)
 pg_database = data.get('postgres', 'PG_DATABASE', vars=os.environ)
 
-
-def get_logger():
-    logger = logging.getLogger('alice_auth_api')
-    logger.setLevel(logging.DEBUG)
-
-    els_handler = ELSLoggerHandler(els_host, els_port, els_user, els_pwd)
-    logger.addHandler(els_handler)
-    return logger
